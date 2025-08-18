@@ -1,0 +1,165 @@
+{
+  "flow": [
+    {
+      "id": "f1",
+      "stage": "Farm",
+      "company": "Farm A (PIC NS123456)",
+      "date": "2025-08-15",
+      "refs": {
+        "NVD": "NVD-2025-08-15-001",
+        "PIC": "NS123456"
+      },
+      "metrics": {
+        "head": 48
+      },
+      "tags": [
+        "eNVD",
+        "NLIS"
+      ]
+    },
+    {
+      "id": "f2",
+      "stage": "Transport",
+      "company": "Lindsay Transport Pty Ltd",
+      "from": "Farm A (PIC NS123456)",
+      "to": "JBS Dinmore (PIC QL654321)",
+      "date": "2025-08-15",
+      "metrics": {
+        "tempAvgC": 3.1
+      },
+      "tags": [
+        "Animal Welfare",
+        "Temp Log"
+      ]
+    },
+    {
+      "id": "f3",
+      "stage": "Processor",
+      "company": "JBS Dinmore (Processor)",
+      "date": "2025-08-16",
+      "refs": {
+        "CarcaseID": "C-20250816-001\u2026048",
+        "MSA_Batch": "MSA-0816-A"
+      },
+      "metrics": {
+        "HSCW_avg_kg": 298,
+        "MSA_Index_avg": 63.2
+      },
+      "tags": [
+        "MSA",
+        "AUS-MEAT"
+      ]
+    },
+    {
+      "id": "f4",
+      "stage": "Case-Ready",
+      "company": "Hilton Foods Australia",
+      "date": "2025-08-16",
+      "refs": {
+        "ASN": "ASN20250816",
+        "SSCC": "003934567890123456",
+        "GTIN": "09345678000012",
+        "Lot": "BEEF-AUG15-01"
+      },
+      "tags": [
+        "DESADV",
+        "GS1-128"
+      ]
+    },
+    {
+      "id": "f5",
+      "stage": "DC",
+      "company": "Woolworths DC \u2013 Minchinbury NSW",
+      "date": "2025-08-17",
+      "metrics": {
+        "pallets": 48,
+        "ssccMatch": "100%",
+        "tempArrivalC": 1.8
+      },
+      "tags": [
+        "QA",
+        "Vendor Compliance"
+      ]
+    },
+    {
+      "id": "f6",
+      "stage": "Store",
+      "company": "Woolworths Parramatta Store",
+      "date": "2025-08-17",
+      "metrics": {
+        "posScans": 1324,
+        "wastePct": "1.2%"
+      },
+      "tags": [
+        "POS",
+        "Sales"
+      ]
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "FarmA",
+        "label": "Farm A\\nPIC NS123456",
+        "group": "Farm"
+      },
+      {
+        "id": "Transport",
+        "label": "Lindsay Transport",
+        "group": "Transport"
+      },
+      {
+        "id": "Processor",
+        "label": "JBS Dinmore",
+        "group": "Processor"
+      },
+      {
+        "id": "CaseReady",
+        "label": "Hilton Foods",
+        "group": "Case-Ready"
+      },
+      {
+        "id": "DC",
+        "label": "Woolworths DC\\nMinchinbury",
+        "group": "DC"
+      },
+      {
+        "id": "Store",
+        "label": "Woolworths\\nParramatta",
+        "group": "Store"
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1",
+        "source": "FarmA",
+        "target": "Transport",
+        "label": "eNVD/NLIS"
+      },
+      {
+        "id": "e2",
+        "source": "Transport",
+        "target": "Processor",
+        "label": "Movement"
+      },
+      {
+        "id": "e3",
+        "source": "Processor",
+        "target": "CaseReady",
+        "label": "MSA/Cartons"
+      },
+      {
+        "id": "e4",
+        "source": "CaseReady",
+        "target": "DC",
+        "label": "DESADV/SSCC"
+      },
+      {
+        "id": "e5",
+        "source": "DC",
+        "target": "Store",
+        "label": "QA/POS"
+      }
+    ]
+  }
+}
